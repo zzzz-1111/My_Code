@@ -1,21 +1,22 @@
 class mt19937
 {
 public:
-	mt19937(int seed = 0) :index(0) { srand(seed); }
+	typedef unsigned int rand_t;
+	mt19937(rand_t seed = 0) :index(0) { srand(seed); }
 
-	void srand(int seed) // 设置随机数种子
+	void srand(rand_t seed) // 设置随机数种子
 	{
 		mt[0] = seed;
 		for (int i = 1; i < N; ++i)
 			mt[i] = f * (mt[i - 1] ^ (mt[i - 1] >> 30)) + i;
 	}
 
-	int rand() // 生成一个随机数
+	rand_t rand() // 生成一个随机数
 	{
 		// index表示用到序列哪了
 		if (index == N)
 			generate(); // 用完了就重新产生一串
-		int x = mt[index++];
+		rand_t x = mt[index++];
 		x ^= x >> 11;
 		x ^= x << 7 & b;
 		x ^= x << 15 & c;
@@ -39,8 +40,7 @@ private:
 	{
 		for (int i = 0; i < N; ++i)
 		{
-			int x = (mt[i] & upper_bit) + (mt[mod(i + 1)] & lower_bit),
-				xA = x >> 1;
+			rand_t x = (mt[i] & upper_bit) + (mt[mod(i + 1)] & lower_bit), xA = x >> 1;
 			if (x & 1)
 				xA ^= a;
 			mt[i] = mt[mod(i + 397)] ^ xA;
@@ -48,5 +48,6 @@ private:
 		index = 0; // 从0开始用
 	}
 
-	int mt[N], index;
+	rand_t mt[N];
+	int index;
 };
