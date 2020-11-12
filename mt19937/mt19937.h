@@ -1,3 +1,5 @@
+#ifndef __MT19937
+#define __MT19937
 class mt19937
 {
 public:
@@ -51,3 +53,4 @@ private:
 	rand_t mt[N];
 	int index;
 };
+#endif
