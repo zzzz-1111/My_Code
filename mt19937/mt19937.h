@@ -1,7 +1,12 @@
 class mt19937
 {
 public:
-    mt19937(int seed = 0) :index(0) { srand(seed); }
+	mt19937(int seed = 0) :index(0) { srand(seed); }
+	mt19937(const mt19937& other) :index(other.index)
+	{
+		for (int i = 0; i < N; ++i)
+			mt[i] = other.mt[i];
+	}
 
     void srand(int seed) // 设置随机数种子
     {
