@@ -48,10 +48,10 @@ namespace IO
 	{
 		(*p3++ = ch, p3 == p4) and (fwrite(buf2, 1, N, stdout), p3 = buf2);
 	}
-	void print() {}
+	void write() {}
 
 	// 输出字符串
-	inline void print(const char* ch)
+	inline void write(const char* ch)
 	{
 		for (; *ch; ++ch)
 			putc(*ch);
@@ -59,7 +59,7 @@ namespace IO
 
 	// 输出整数
 	template <typename T, typename... T2>
-	inline void print(T x, T2... oth)
+	inline void write(T x, T2... oth)
 	{
 		static int a[21];
 		int p = 0;
@@ -71,7 +71,7 @@ namespace IO
 		while (p)
 			putc(a[p--]);
 		putc(hh);
-		print(oth...);
+		write(oth...);
 	}
 }
 #endif
