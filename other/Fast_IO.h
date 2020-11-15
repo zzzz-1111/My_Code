@@ -73,5 +73,7 @@ namespace IO
 		putc(hh);
 		write(oth...);
 	}
+	
+	inline void flush() { fwrite(buf2, 1, p3 - buf2, stdout); }
 }
 #endif
